@@ -1,6 +1,9 @@
 <template>
   <v-container>
     <template>
+      <v-row class="justify-center mt-15">
+        <v-col class="col-12 col-md-6">
+          <h1 class="mb-10">Formulario de contacto</h1>
   <v-form
     ref="form"
     v-model="valid"
@@ -60,6 +63,8 @@
       Reset Validation
     </v-btn>
   </v-form>
+  </v-col>
+  </v-row>
 </template>
   </v-container>
 </template>
