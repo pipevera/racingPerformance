@@ -2,7 +2,7 @@
   <v-container>
     <v-toolbar color="black" dark fixed >
       <v-toolbar-title>
-        <v-img src="../assets/img/racingPerformance.jpeg" width="50%"></v-img>
+        <v-img src="../assets/img/racingPerformance.jpeg" width="35%"></v-img>
       </v-toolbar-title>
         <v-spacer></v-spacer>
         <v-toolbar-items class="hidden-sm-and-down">
@@ -12,6 +12,8 @@
           <v-btn text><router-link class="links" to="/servicios">Servicios</router-link></v-btn>
           <v-btn text><router-link class="links" to="/chirighin">Chirighin</router-link></v-btn>
           <v-btn text><router-link class="links" to="/contacto">Contacto</router-link></v-btn>
+             <v-btn class="rounded-pill" color="#31A1AC">  <v-icon left>mdi-login</v-icon><router-link class="links button is-dark " to="/login">Iniciar sesión</router-link></v-btn>
+
           <v-btn text @click="signOut" v-if="auth">
             <span class="mr-2">{{userDataEmail}}</span>
             <v-icon>mdi-logout</v-icon>
