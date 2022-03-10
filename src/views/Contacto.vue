@@ -10,6 +10,7 @@
               name="contact"
               lazy-validation
             >
+            <input type="hidden" name="contact" value="contact"/>
               <v-text-field
                 name="name"
                 v-model="form.name"
