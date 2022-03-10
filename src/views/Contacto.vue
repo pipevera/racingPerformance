@@ -5,7 +5,8 @@
         <v-col class="col-12 col-md-6">
           <h1 class="mb-10">Formulario de contacto</h1>
             <form
-              @submit.prevent="handleSubmit"
+              method="POST"
+              data-netlify="true"
               id="formContact"
               name="contact"
               lazy-validation
