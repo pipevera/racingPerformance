@@ -54,7 +54,7 @@
   </v-container>
 </template>
 <script>
-/* import axios from "axios" */
+import axios from "axios"
   export default {
     data: () => ({
       valid: true,
@@ -74,7 +74,8 @@
     }),
 
     methods: {
-      handleSubmit(e) {
+      
+     /*  handleSubmit(e) {
   e.preventDefault();
   let myForm = document.getElementById("formContact");
   let formData = new FormData(myForm);
@@ -85,8 +86,8 @@
   })
     .then(() => console.log("Form successfully submitted"))
     .catch((error) => alert(error));
-},
-     /* encode (data) {
+}, */
+     encode (data) {
       return Object.keys(data)
         .map(
           key => `${encodeURIComponent(key)}=${encodeURIComponent(data[key])}`
@@ -104,7 +105,7 @@
           ...this.form
         }),
         axiosConfig
-      ) */
+      ) 
       /* .then(() => {
         this.$router.push('thanks')
       })
@@ -112,6 +113,7 @@
         this.$router.push('404')
       }) */
     }
+  }
   }
 
 </script>
