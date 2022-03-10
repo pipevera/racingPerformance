@@ -14,7 +14,7 @@
               name="contact"
               lazy-validation
             >
-            <input type="hidden" name="contact" value="contact"/>
+            <input type="hidden" name="form-name" value="contact"/>
               <v-text-field
                 name="name"
                 v-model="form.name"
@@ -40,7 +40,7 @@
                 label="Escribe tu comentario"
               ></v-textarea>
      
-              <!-- <div data-netlify-recaptcha="true"></div> -->
+              <div data-netlify-recaptcha="true"></div>
 
               <v-btn
                 :disabled="!valid"
