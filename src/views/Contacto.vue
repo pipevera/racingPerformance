@@ -99,7 +99,7 @@ import axios from "axios"
         headers: { "Content-Type": "application/x-www-form-urlencoded" }
       };
       axios.post(
-        "/",
+        "/contacto",
         this.encode({
           "form-name": "contact",
           ...this.form
