@@ -54,7 +54,7 @@
   </v-container>
 </template>
 <script>
-/* import axios from "axios" */
+import axios from "axios"
   export default {
     data: () => ({
       valid: true,
@@ -95,14 +95,17 @@
         .join("&");
       },
       handleSubmit () {
-      fetch("/", {
-        method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: this.encode({
-          'form-name': 'contact',
+      const axiosConfig = {
+        headers: { "Content-Type": "application/x-www-form-urlencoded" }
+      };
+      axios.post(
+        "/contacto",
+        this.encode({
+          "form-name": "contact",
           ...this.form
         }),
-  })
+        axiosConfig
+      ) 
       /* .then(() => {
         this.$router.push('thanks')
       })
