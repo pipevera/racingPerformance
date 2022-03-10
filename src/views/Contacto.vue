@@ -7,6 +7,9 @@
             <form
               method="POST"
               data-netlify="true"
+              data-netlify-honeypot="bot-field"
+              data-netlify-recaptcha="true"
+              action="/"
               id="formContact"
               name="contact"
               lazy-validation
@@ -37,7 +40,7 @@
                 label="Escribe tu comentario"
               ></v-textarea>
      
-              <div data-netlify-recaptcha="true"></div>
+              <!-- <div data-netlify-recaptcha="true"></div> -->
 
               <v-btn
                 :disabled="!valid"
