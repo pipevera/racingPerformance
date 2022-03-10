@@ -5,6 +5,8 @@
         <v-col class="col-12 col-md-6">
           <h1 class="mb-10">Formulario de contacto</h1>
             <form
+              @submit.prevent="handleSubmit"
+              id="formContact"
               name="contact"
               method="POST"
               data-netlify="true"
@@ -42,7 +44,7 @@
                 :disabled="!valid"
                 color="success"
                 class="mr-4"
-                
+                type="submit"
               >
                 Enviar
               </v-btn>
@@ -54,7 +56,7 @@
   </v-container>
 </template>
 <script>
-import axios from "axios"
+/* import axios from "axios" */
   export default {
     data: () => ({
       valid: true,
@@ -74,7 +76,19 @@ import axios from "axios"
     }),
 
     methods: {
-     encode (data) {
+      handleSubmit(e) {
+  e.preventDefault();
+  let myForm = document.getElementById("formContact");
+  let formData = new FormData(myForm);
+  fetch("/", {
+    method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: new URLSearchParams(formData).toString(),
+  })
+    .then(() => console.log("Form successfully submitted"))
+    .catch((error) => alert(error));
+},
+     /* encode (data) {
       return Object.keys(data)
         .map(
           key => `${encodeURIComponent(key)}=${encodeURIComponent(data[key])}`
@@ -92,7 +106,7 @@ import axios from "axios"
           ...this.form
         }),
         axiosConfig
-      )
+      ) */
       /* .then(() => {
         this.$router.push('thanks')
       })
@@ -101,5 +115,5 @@ import axios from "axios"
       }) */
     }
   }
-}
+
 </script>
