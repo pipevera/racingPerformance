@@ -8,9 +8,6 @@
               @submit.prevent="handleSubmit"
               id="formContact"
               name="contact"
-              method="POST"
-              data-netlify="true"
-              data-netlify-honeypot="bot-field"
               lazy-validation
             >
               <v-text-field
