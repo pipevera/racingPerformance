@@ -9,7 +9,6 @@
               method="POST"
               data-netlify="true"
               data-netlify-honeypot="bot-field"
-              ref="form"
               lazy-validation
             >
               <v-text-field
@@ -43,7 +42,7 @@
                 :disabled="!valid"
                 color="success"
                 class="mr-4"
-                @click="handleSubmit"
+                
               >
                 Enviar
               </v-btn>
@@ -61,7 +60,7 @@ import axios from "axios"
       valid: true,
       nameRules: [
         v => !!v || 'Name is required',
-        v => (v && v.length <= 10) || 'Name must be less than 10 characters',
+        v => (v && v.length <= 15) || 'Name must be less than 10 characters',
       ],
       emailRules: [
         v => !!v || 'E-mail is required',
@@ -93,8 +92,14 @@ import axios from "axios"
           ...this.form
         }),
         axiosConfig
-      );
+      )
+      /* .then(() => {
+        this.$router.push('thanks')
+      })
+      .catch(() => {
+        this.$router.push('404')
+      }) */
     }
-  },
+  }
 }
 </script>
