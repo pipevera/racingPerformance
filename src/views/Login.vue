@@ -83,6 +83,7 @@
 </template>
 <script>
 import { userLogin } from "../firebase/auth";
+import Swal from "sweetalert2";
 export default {
   data() {
     return {
@@ -94,8 +95,20 @@ export default {
     validate() {
       userLogin(this.email, this.password);
       this.$router.push("admin");
-      alert('You clicked the button!')
+      // alert('usuario no registrado')
+
+
+Swal.fire({
+  title: 'Oops...',
+  text: 'Usuario no registrado',
+  icon: 'error',
+  confirmButtonText: 'Continuar',
+  // footer: '<a href="http://localhost:8081/register">Registrarse</a>'
+});
+    
     },
+    
+    
 
 
     reset() {

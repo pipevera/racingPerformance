@@ -92,6 +92,7 @@
 </template>
 <script>
 import { userRegister } from "../firebase/auth";
+import Swal from "sweetalert2";
 export default {
   data() {
     return {
@@ -103,20 +104,43 @@ export default {
   methods: {
     register() {
       userRegister(this.email, this.password, this.alertRegister);
+
+//       Swal.fire({
+//   title: 'Oops...',
+//   text: 'El usuario especificado no tiene perfil válido',
+//   icon: 'error',
+//   confirmButtonText: 'Continuar',
+// });
+    
     },
     resetForm() {
       this.email = "";
       this.password = "";
     },
     alertRegister() {
+      
       this.alert = true;
       this.email = "";
       this.password = "";
+
+            Swal.fire({
+  title: 'Muy bien...',
+  text: 'Usuario registrado',
+  icon: 'success',
+  confirmButtonText: 'Continuar',
+  // footer: '<a href="http://localhost:8081/register">Registrarse</a>'
+});
+    
     },
+
+    
     login() {
       this.$router.push("/login");
+      
     },
+
   },
+  
 };
 </script>
 <style scoped>
