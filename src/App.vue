@@ -1,9 +1,9 @@
 <template>
   <v-app>
-    <v-app-bar app flat color="black" height="100">
+
       <Navbar></Navbar>
-    </v-app-bar>
       <v-main>
+     
         <router-view/>
       </v-main>
     <Footer></Footer>
@@ -11,12 +11,13 @@
 </template>
 
 <script>
-import Navbar from './components/Navbar.vue'
-import Footer from './components/Footer.vue'
+import Footer from './components/Footer.vue';
+import Navbar from './components/Navbar';// Se importa componente NevDrawers
+
 
 export default {
   name: 'App',
-  components: {Navbar, Footer},
+  components: {Navbar,Footer},
   data: () => ({
     //
   }),
