@@ -1,10 +1,13 @@
 <template>
-  <v-container>
+  <v-container class="" style=" padding-top: 10rem;">
     <v-row align="center" justify="center">
-      <v-col >
-<h1>Administración de productos</h1>
-      </v-col>
-      <v-col >
+
+      <v-col cols="12" class="d-flex justify-md-space-between">
+       
+      
+           <h1 class="contenedor mt-0 mb-15">
+                  <strong color="#31A1AC">Registro</strong> de productos
+                </h1>
           <v-dialog
       v-model="dialog"
       persistent
@@ -12,17 +15,22 @@
     >
       <template v-slot:activator="{ on, attrs }">
         <v-btn
-          color="primary"
+           class="mt-4 mr-4"
+                    color="#31A1AC"
+                    x-large
           dark
           v-bind="attrs"
           v-on="on"
         >
+           <v-icon left>mdi-plus</v-icon>
           Agregar Producto
         </v-btn>
+
+      
       </template>
       <v-card>
         <v-card-title>
-          <span class="text-h5">Nuevo Producto</span>
+          <h2 class="text-h5 font-weight-bold pt-6">Ingresar nuevo producto</h2>
         </v-card-title>
         <v-card-text>
           <v-container>
@@ -41,8 +49,18 @@
                 ></v-text-field>
               </v-col>
               <v-col cols="12">
-                <v-text-field label="imagen" required v-model="productos.imagen"
-                ></v-text-field>
+                <!-- <v-text-field label="imagen" required v-model="productos.imagen"
+                ></v-text-field> -->
+
+  <v-file-input 
+  v-model="imagen"
+     @change="Preview_image"
+      chips
+      multiple
+      label="Subir imagen del producto"
+    ></v-file-input>
+    <v-img :src="url"></v-img>
+
                 </v-col>
             </v-row>
           </v-container>
@@ -50,9 +68,16 @@
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="success" class="mt-4 mr-4" @click="addProduct">Agregar</v-btn>
+             <v-btn     color="#31A1AC"
+                      outlined
+                      class="mt-4 mr-4"
+                      x-large @click="dialog = false">cerrar</v-btn>
+          <v-btn     class="mt-4 mr-4"
+                    color="#31A1AC"
+                    dark
+                    x-large @click="addProduct">  <v-icon left>mdi-plus</v-icon>Agregar</v-btn>
           
-          <v-btn color="warning" class="mr-4 mt-5" @click="dialog = false">cerrar</v-btn>
+       
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -62,7 +87,18 @@
     <v-row>
       <v-col cols="12">
         <v-data-table :headers="headers"  :items="products" :items-per-page="5" class="elevation-1" >
-         <template v-slot:item.actions="{ item }">
+<template v-slot:item.actions="{ item }" > 
+             
+        <!-- <template v-slot:item.precio.actions="{ item }"> -->
+      <!-- <v-chip
+      :item="ite"
+        :color="getColor(item.precio)"
+        dark
+      >
+        {{ item.precio}}
+      </v-chip> -->
+
+                  
            <v-icon small class="mr-2" @click="editItem(item)">mdi-pencil</v-icon>
             <v-icon small @click="openDeleteModal">mdi-delete</v-icon>
             <v-dialog v-model="dialogDelete" max-width="500px">
@@ -71,12 +107,12 @@
             <v-card-actions>
               <v-spacer></v-spacer>
               <v-btn color="blue darken-1" text @click="closeDelete">Cancel</v-btn>
-              <v-btn color="blue darken-1" text @click="() => deleteItemConfirm(item)">OK</v-btn>
+              <v-btn color="blue darken-1" text @click="deleteItemConfirm(item)">OK</v-btn>
               <v-spacer></v-spacer>
             </v-card-actions>
           </v-card>
         </v-dialog>
-          </template> 
+         </template>
       </v-data-table>
       
       </v-col>
@@ -87,6 +123,7 @@
 </template>
 <script>
 import { addData } from '../firebase/firestore.js'
+import Swal from "sweetalert2";
 
   export default {
     data() {
@@ -96,6 +133,7 @@ import { addData } from '../firebase/firestore.js'
           precio: "",
           descripcion: "",
           imagen: "",
+          url:"",
         },
         dialogDelete: false,
         dialog: false,
@@ -103,19 +141,36 @@ import { addData } from '../firebase/firestore.js'
           {text: 'Nombre',value: 'nombre'},
           { text: 'Valor', value: 'precio' },
           { text: 'Descripción', value: 'descripcion' },
+          { text: 'Imagen', value: 'imagen' },
           { text: 'Actions', value: 'actions', sortable: false },
         ],
       }
     },
     methods: {
       crearProductoCallback() {
-        alert('Producto creado')
+        // alert('Producto creado')
         this.productos.nombre = "",
         this.productos.precio = "",
         this.productos.descripcion = "",
         this.productos.imagen = ""
 
+        
+
+                    Swal.fire({
+  title: 'Muy bien...',
+  text: 'Producto agregado',
+  icon: 'success',
+  confirmButtonText: 'Continuar',
+  // footer: '<a href="http://localhost:8081/register">Registrarse</a>'
+});
+    
+
       },
+
+        Preview_image() {
+          this.url= URL.createObjectURL(this.imagen)
+        },
+
       addProduct() {
         addData(this.productos, this.crearProductoCallback)
         this.dialog = false
@@ -133,6 +188,20 @@ import { addData } from '../firebase/firestore.js'
     created() {
       this.$store.dispatch('getData')
     },
+
+      deleteItemConfirm(item) {
+      this.$store.commit('deleteItemConfirm', item);
+      
+    },
+
+
+      getColor (precio) {
+        if (precio> 400) return 'red'
+        else if (precio> 200) return 'orange'
+        else return 'green'
+      },
+    
+    
     computed: {
       products() {
         return this.$store.state.products
@@ -145,6 +214,12 @@ import { addData } from '../firebase/firestore.js'
   margin-top: 3rem;
 }
 h1 {
-  font-size: 3em;
+  font-family: "Teko", sans-serif;
+  font-size: 4rem;
+  font-weight: normal;
+}
+b,
+strong {
+  color: #31a1ac;
 }
 </style>
