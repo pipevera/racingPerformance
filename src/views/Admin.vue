@@ -87,7 +87,7 @@
 </template>
 <script>
 import { addData } from '../firebase/firestore.js'
-
+import { deleteData } from '../firebase/firestore.js'
   export default {
     data() {
       return {
@@ -128,6 +128,18 @@ import { addData } from '../firebase/firestore.js'
       },
       closeDelete() {
         this.dialogDelete = false
+      },
+      async deleteItemConfirm(item) {
+        await deleteData(item.id)
+        this.dialogDelete = false
+        alert("elemento eliminado")
+        await this.$store.dispatch('getData')
+      },
+      editItem(item){
+        this.$router.push({
+          name: "editar", 
+          params: { item }
+        })
       },
     },
     created() {

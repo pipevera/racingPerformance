@@ -6,13 +6,13 @@
       </v-toolbar-title>
         <v-spacer></v-spacer>
         <v-toolbar-items class="hidden-sm-and-down">
-          <v-btn text v-if="auth"><router-link class="links" to="/admin">Administración</router-link></v-btn>
+          <v-btn text ><router-link class="links" to="/admin" v-if="auth">Administración</router-link></v-btn>
           <v-btn text><router-link class="links" to="/">Inicio</router-link></v-btn>
           <v-btn text><router-link class="links" to="/productos">Productos</router-link></v-btn>
           <v-btn text><router-link class="links" to="/servicios">Servicios</router-link></v-btn>
           <v-btn text><router-link class="links" to="/chirighin">Chirighin</router-link></v-btn>
           <v-btn text><router-link class="links" to="/contacto">Contacto</router-link></v-btn>
-             <v-btn class="rounded-pill" color="#31A1AC">  <v-icon left>mdi-login</v-icon><router-link class="links button is-dark " to="/login">Iniciar sesión</router-link></v-btn>
+          <v-btn class="rounded-pill" color="#31A1AC"><v-icon left>mdi-login</v-icon><router-link class="links button is-dark " to="/login">Iniciar sesión</router-link></v-btn>
 
           <v-btn text @click="signOut" v-if="auth">
             <span class="mr-2">{{userDataEmail}}</span>
@@ -32,7 +32,8 @@ import { logOut } from '../firebase/auth'
     methods: {
       signOut() {
         logOut()
-        this.$store.commit('delEmail')
+          this.$store.commit('delEmail')
+       
       },
       setAuthState() {
          if(this.userDataEmail == "") {

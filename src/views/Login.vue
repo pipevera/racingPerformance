@@ -23,7 +23,7 @@
   
                  <h1 class="contenedor mt-0 mb-15"><strong  color="#31A1AC">LOGIN</strong> de usuario</h1>
            
-              <v-text-field v-model="email" label="E-mail" color="#31A1AC" :rules="rules" required  >   <v-icon
+              <v-text-field v-model="email" label="E-mail" color="#31A1AC" required  >   <v-icon
       slot="append"
       color="#31A1AC"
     >
@@ -72,8 +72,11 @@ import { userLogin } from '../firebase/auth'
     },
     methods: {
       validate() {
-        userLogin(this.email, this.password)
+        userLogin(this.email, this.password, this.getEmail)
         this.$router.push('admin')
+      },
+      getEmail(email) {
+        this.$store.commit('email', email)
       },
       reset() {
         this.email = ""
