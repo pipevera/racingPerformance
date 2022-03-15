@@ -1,123 +1,26 @@
 <template>
-  <v-container>
-   
-      <v-row class="justify-center mt-15">
-        <v-col class="col-12 col-md-6">
-          <h1 class="mb-10">Formulario de contacto</h1>
-            <form
-              method="POST"
-              data-netlify="true"
-              data-netlify-honeypot="bot-field"
-            
-              action="/"
-              id="formContact"
-              name="contact"
-              lazy-validation
-            >
-            <input type="hidden" name="form-name" value="contact"/>
-              <v-text-field
-                name="name"
-                v-model="form.name"
-                :counter="10"
-                :rules="nameRules"
-                label="Nombre"
-                required
-              ></v-text-field>
-
-              <v-text-field
-                name="email"
-                v-model="form.email"
-                :rules="emailRules"
-                label="E-mail"
-                required
-              ></v-text-field>
-
-             
-              <v-textarea
-                name="message"
-                v-model="form.message"
-                solo
-                label="Escribe tu comentario"
-              ></v-textarea>
-     
-        
-
-              <v-btn
-                :disabled="!valid"
-                color="success"
-                class="mr-4"
-                type="submit"
-              >
-                Enviar
-              </v-btn>
-
-             
-            </form>
-          </v-col>
-        </v-row>
-  </v-container>
+  <div>
+    <h1 class="mb-10">Formulario de contacto</h1>
+    <form name="contact" method="POST">
+      <input name="nombre" type="text" placeholder="Nombre" v-model="form.name">
+      <input name="email" type="text" placeholder="Correo" v-model="form.email">
+      <textarea name="mensaje" id="" cols="30" rows="10" v-model="form.mensaje"></textarea>
+      <input name="form-name" type="hidden" value="contact"/>
+      <button type="submit">Enviar</button>
+    </form>
+  </div>
 </template>
 <script>
-import axios from "axios"
-  export default {
-    data: () => ({
-      valid: true,
-      nameRules: [
-        v => !!v || 'Name is required',
-        v => (v && v.length <= 15) || 'Name must be less than 10 characters',
-      ],
-      emailRules: [
-        v => !!v || 'E-mail is required',
-        v => /.+@.+\..+/.test(v) || 'E-mail must be valid',
-      ],
+export default {
+  data(){
+    return {
       form: {
         name: "",
         email: "",
-        message: ""
-      }
-    }),
+        mensaje: ""
 
-    methods: {
-      
-     /*  handleSubmit(e) {
-  e.preventDefault();
-  let myForm = document.getElementById("formContact");
-  let formData = new FormData(myForm);
-  fetch("/", {
-    method: "POST",
-    headers: { "Content-Type": "application/x-www-form-urlencoded" },
-    body: new URLSearchParams(formData).toString(),
-  })
-    .then(() => console.log("Form successfully submitted"))
-    .catch((error) => alert(error));
-}, */
-     encode (data) {
-      return Object.keys(data)
-        .map(
-          key => `${encodeURIComponent(key)}=${encodeURIComponent(data[key])}`
-        )
-        .join("&");
-      },
-      handleSubmit () {
-      const axiosConfig = {
-        headers: { "Content-Type": "application/x-www-form-urlencoded" }
-      };
-      axios.post(
-        "/contacto",
-        this.encode({
-          "form-name": "contact",
-          ...this.form
-        }),
-        axiosConfig
-      ) 
-      /* .then(() => {
-        this.$router.push('thanks')
-      })
-      .catch(() => {
-        this.$router.push('404')
-      }) */
+      }
     }
   }
-  }
-
+}
 </script>

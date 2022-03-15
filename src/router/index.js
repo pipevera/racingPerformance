@@ -1,8 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import { observador } from '../firebase/auth'
-import SubmissionSuccess from '../components/SubmissionSuccess'
-import SubmissionFail from '../components/SubmissionFail'
 Vue.use(VueRouter)
 
 const routes = [
@@ -50,17 +48,7 @@ const routes = [
     path: '/register',
     name: 'Register',
     component: () => import('../views/Register.vue')
-  },
-  {
-    path: '/thanks',
-    name: 'succes',
-    component: SubmissionSuccess
-  },
-  {
-    path: '/404',
-    name: 'Fail',
-    component: SubmissionFail
-  },
+  }
 ]
 
 const router = new VueRouter({
