@@ -56,7 +56,7 @@ const observador = (to, next) => {
       }
     } else {
       if (to.path === "/login") {
-        next("/admin");
+        next("/admin", "/editar");
       } else {
         next(); 
       }

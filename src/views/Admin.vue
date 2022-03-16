@@ -137,7 +137,7 @@ import { deleteData } from '../firebase/firestore.js'
       },
       editItem(item){
         this.$router.push({
-          name: "editar", 
+          name: "Editar", 
           params: { item }
         })
       },
