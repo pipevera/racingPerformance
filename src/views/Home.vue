@@ -2,13 +2,13 @@
   <div>
       <Carousel></Carousel> 
    <Main></Main> 
-  <HomeCards></HomeCards>
+  <!-- <HomeCards></HomeCards> -->
   
   </div>
 </template>
 
 <script>
-import HomeCards from '../components/HomeCards'
+// import HomeCards from '../components/HomeCards'
 import Main from '../components/Main.vue'
 import Carousel from '../components/Carousel.vue'
 
@@ -22,7 +22,7 @@ import Carousel from '../components/Carousel.vue'
  components: {
     Carousel,
        Main,
-  HomeCards,
+  // HomeCards,
   },
 };
 </script>

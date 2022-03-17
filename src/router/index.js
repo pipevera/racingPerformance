@@ -49,6 +49,11 @@ const routes = [
     name: 'Register',
     component: () => import('../views/Register.vue')
   },
+  {
+    path: '/editar',
+    name: 'Editar',
+    component: () => import('../views/Editar.vue')
+  }
 ]
 
 const router = new VueRouter({

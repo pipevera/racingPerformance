@@ -49,17 +49,17 @@
                 ></v-text-field>
               </v-col>
               <v-col cols="12">
-                <!-- <v-text-field label="imagen" required v-model="productos.imagen"
-                ></v-text-field> -->
+               <v-text-field label="imagen" required v-model="productos.imagen"
+                ></v-text-field> 
 
-  <v-file-input 
+  <!-- <v-file-input 
   v-model="imagen"
      @change="Preview_image"
       chips
       multiple
-      label="Subir imagen del producto"
+      label="Subir imagen"
     ></v-file-input>
-    <v-img :src="url"></v-img>
+    <v-img :src="url"></v-img> -->
 
                 </v-col>
             </v-row>
@@ -99,8 +99,11 @@
       </v-chip> -->
 
                   
-           <v-icon small class="mr-2" @click="editItem(item)">mdi-pencil</v-icon>
-            <v-icon small @click="openDeleteModal">mdi-delete</v-icon>
+          <v-tooltip bottom> <template v-slot:activator="{ on, attrs }"><v-icon   v-bind="attrs"
+          v-on="on" small class="mr-2" @click="editItem(item)">mdi-pencil</v-icon> </template> <span>Editar</span></v-tooltip>
+
+       <v-tooltip bottom> <template v-slot:activator="{ on, attrs }"><v-icon   v-bind="attrs"
+          v-on="on" small @click="openDeleteModal">mdi-delete</v-icon> </template> <span>Eliminar</span></v-tooltip>
             <v-dialog v-model="dialogDelete" max-width="500px">
             <v-card>
             <v-card-title class="text-h5">¿Quieres eliminar el producto?</v-card-title>
@@ -123,6 +126,7 @@
 </template>
 <script>
 import { addData } from '../firebase/firestore.js'
+import { deleteData } from '../firebase/firestore.js'
 import Swal from "sweetalert2";
 
   export default {
@@ -184,6 +188,19 @@ import Swal from "sweetalert2";
       closeDelete() {
         this.dialogDelete = false
       },
+      async deleteItemConfirm(item) {
+        await deleteData(item.id)
+        this.dialogDelete = false
+        alert("elemento eliminado")
+        await this.$store.dispatch('getData')
+      },
+        editItem(item){
+        this.$router.push({
+          name: "Editar", 
+          params: { item }
+        })
+        },
+      
     },
     created() {
       this.$store.dispatch('getData')

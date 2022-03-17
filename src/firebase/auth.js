@@ -20,11 +20,12 @@ const userRegister = (email, password, callbackRegister) => {
 
 }
 
-const userLogin = (email, password) => {
+const userLogin = (email, password, callbackEmail) => {
   signInWithEmailAndPassword(auth, email, password)
   .then((userCredential) => {
     const user = userCredential.user;
     console.log(user)
+    callbackEmail(user.email)
    
   })
   .catch((error) => {
@@ -55,7 +56,7 @@ const observador = (to, next) => {
       }
     } else {
       if (to.path === "/login") {
-        next("/admin");
+        next("/admin", "/editar");
       } else {
         next(); 
       }

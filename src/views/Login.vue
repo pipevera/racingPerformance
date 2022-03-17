@@ -73,6 +73,11 @@
            
                   <!-- <v-btn color="error" class="mt-4 mr-4" @click="reset">Limpiar Formulario</v-btn> -->
                 </v-col>
+                    <v-col cols="12" sm="12" md="8" class="contenedor">
+        <v-alert dense dismissible text type="success" v-model="alert"
+          >Usuario registrado</v-alert
+        >
+      </v-col>
               </v-row>
             </v-form>
           </v-card>
@@ -83,34 +88,35 @@
 </template>
 <script>
 import { userLogin } from "../firebase/auth";
-import Swal from "sweetalert2";
+// import Swal from "sweetalert2";
 export default {
   data() {
     return {
+      alert: false,
       email: "",
       password: "",
     };
   },
   methods: {
     validate() {
-      userLogin(this.email, this.password);
+     userLogin(this.email, this.password, this.getEmail)
       this.$router.push("admin");
-      // alert('usuario no registrado')
+    //  alert('usuario no registrado')
 
 
-Swal.fire({
-  title: 'Oops...',
-  text: 'Usuario no registrado',
-  icon: 'error',
-  confirmButtonText: 'Continuar',
-  // footer: '<a href="http://localhost:8081/register">Registrarse</a>'
-});
+// Swal.fire({
+//   title: 'Oops...',
+//   text: 'Usuario no registrado',
+//   icon: 'error',
+//   confirmButtonText: 'Continuar',
+// });
     
     },
-    
-    
 
-
+      getEmail(email) {
+        this.$store.commit('email', email)
+      },
+    
     reset() {
       this.email = "";
       this.password = "";
@@ -118,6 +124,12 @@ Swal.fire({
     register() {
       this.$router.push("register");
     },
+    alertRegister() {
+      
+      this.alert = true;
+      this.email = "";
+      this.password = "";
+  },
   },
 };
 </script>
