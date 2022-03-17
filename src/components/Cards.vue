@@ -5,7 +5,7 @@
       <v-card-title class="titulo">{{producto.nombre}}</v-card-title>
       <v-card-subtitle>{{producto.precio}}</v-card-subtitle>
       <v-card-text>{{producto.descripcion}}</v-card-text>
-      <v-btn color="success" class="" @click="validate">Iniciar</v-btn>   
+      <v-btn color="success" class="" @click="validate">Agregar</v-btn>   
     </v-card>
   </v-col>    
 </template>
