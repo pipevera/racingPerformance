@@ -1,24 +1,2 @@
-# racingperformance
-
-## Project setup
-```
-npm install
-```
-
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+# Racing Performance
+![image](https://github.com/pipevera/racingPerformance/assets/30265690/d7e258fc-1095-4d69-9dec-1678e52f95f3)
